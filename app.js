@@ -1,7 +1,25 @@
 var express = require('express');
 var path = require('path');
+const mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
+const dotenv = require("dotenv");
 var logger = require('morgan');
+
+dotenv.config({ path: "./config.env" });
+const DB = process.env.DATABASE.replace(
+  "<password>",
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB)
+  .then(() => {
+    console.log("connect success");
+  })
+  .catch((error) => {
+    console.error(error.reason);
+  });
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
