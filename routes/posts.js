@@ -28,7 +28,7 @@ router.patch('/:id', async function(req, res, next) {
     try {
         const { id } = req.params;
         const { name, content } = req.body;
-        if(name === undefined && content === undefined){
+        if(name === undefined || content === undefined){
             res.status(400).send("參數有缺");
             return     
         }
